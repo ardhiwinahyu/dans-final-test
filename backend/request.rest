@@ -1,0 +1,21 @@
+#GET http://localhost:5000/user
+###
+
+# POST http://localhost:5000/user/register
+# Content-Type: application/json
+
+# {
+# 	"email" : "annita.rahma6@gmail.com",
+# 	"name" : "Annita Rahma",
+# 	"password" : "12345"
+
+# }
+
+POST http://localhost:5000/user/login
+Content-Type: application/json
+
+{
+	"email" : "ardhi.winahyu@gmail.com",
+	"password" : "12345"
+
+}

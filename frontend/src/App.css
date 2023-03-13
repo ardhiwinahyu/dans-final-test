@@ -1,0 +1,107 @@
+#root {
+	margin: 0 auto;
+
+	text-align: center;
+}
+
+* {
+	box-sizing: border-box;
+	/* outline: 1px solid red; */
+	color: black;
+	overflow-x: hidden;
+}
+
+.logo {
+	height: 6em;
+	padding: 1.5em;
+	will-change: filter;
+}
+.logo:hover {
+	filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+	filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	a:nth-of-type(2) .logo {
+		animation: logo-spin infinite 20s linear;
+	}
+}
+
+.card {
+	padding: 2em;
+}
+
+.read-the-docs {
+	color: #888;
+}
+
+.root-layout {
+	display: flex;
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+.nav {
+	width: 20%;
+	background-color: #888;
+}
+
+.nav a {
+	color: wheat;
+	display: inline-block;
+	padding: 1rem 1rem;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.outlet {
+	background-color: bisque;
+	width: 80%;
+}
+
+.login {
+	padding: 2rem;
+
+	background-color: bisque;
+}
+
+.active {
+	background-color: royalblue;
+}
+
+label > span {
+	display: block;
+}
+
+form > button {
+	display: block;
+	margin: 0 auto;
+	margin-top: 2rem;
+}
+
+.box-products {
+	border: 2px solid burlywood;
+}
+
+.list-products {
+	max-width: 100%;
+}
+
+.black {
+	color: black;
+	background-color: transparent;
+}
