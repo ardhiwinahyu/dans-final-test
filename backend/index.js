@@ -15,6 +15,7 @@ const { sendToHr } = require("./cron");
 const userRoute = require("./routes/user.route");
 const presenceRoute = require("./routes/presence.route");
 const overtimeRoute = require("./routes/overtime.route");
+const reimbursementRoute = require("./routes/reimbursement.route");
 
 const cors = require("cors");
 const db = require("./configs/database");
@@ -48,6 +49,7 @@ app.use(cors());
 app.use("/user", userRoute);
 app.use("/presence", presenceRoute);
 app.use("/overtime", overtimeRoute);
+app.use("/reimbursement", reimbursementRoute);
 
 schedule.scheduleJob("0 0 * * *", async function () {
 	try {

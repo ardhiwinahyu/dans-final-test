@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
-import dateFormat from "dateformat";
+
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-function RequestOvertime() {
+function Reimbursement() {
 	const { id } = useSelector((store) => store.user);
 
 	const [userId, setUserId] = useState("");
@@ -14,8 +14,6 @@ function RequestOvertime() {
 	}, [id, userId]);
 
 	const defaultData = {
-		startdate: null,
-		enddate: null,
 		reason: null,
 	};
 
@@ -26,10 +24,8 @@ function RequestOvertime() {
 		const sendData = async () => {
 			try {
 				const send = await axios.post(
-					`http://localhost:5000/overtime/createovertime`,
+					`http://localhost:5000/reimbursement/createreimbursement`,
 					{
-						startTime: dateFormat(new Date(data.startdate), "yyyy-mm-dd HH:MM:ss"),
-						endTime: dateFormat(new Date(data.enddate), "yyyy-mm-dd HH:MM:ss"),
 						reason: data.reason,
 						id: userId,
 					},
@@ -59,18 +55,11 @@ function RequestOvertime() {
 
 	return (
 		<div>
-			<h2>RequestOvertime</h2>
+			<h2>Reimbursement</h2>
+
 			<Form method="post" onSubmit={handleSubmit}>
-				<label htmlFor="startdate">
-					Start
-					<input type="datetime-local" name="startdate" onChange={handleChange} />
-				</label>
-				<label htmlFor="enddate">
-					End
-					<input type="datetime-local" name="enddate" onChange={handleChange} />
-				</label>
 				<label htmlFor="reason">
-					<input type="text" name="reason" onChange={handleChange} />
+					<textarea name="reason" rows="5" cols="33" onChange={handleChange} />
 				</label>
 
 				<button type="submit">Sumbit</button>
@@ -79,4 +68,4 @@ function RequestOvertime() {
 	);
 }
 
-export default RequestOvertime;
+export default Reimbursement;

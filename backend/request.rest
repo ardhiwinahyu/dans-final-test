@@ -11,11 +11,11 @@
 
 # }
 
-POST http://localhost:5000/user/login
+GET http://localhost:5000/overtime/lisovertime
 Content-Type: application/json
 
-{
-	"email" : "ardhi.winahyu@gmail.com",
-	"password" : "12345"
+# {
+# 	"email" : "ardhi.winahyu@gmail.com",
+# 	"password" : "12345"
 
-}
+# }

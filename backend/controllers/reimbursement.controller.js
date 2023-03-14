@@ -5,7 +5,7 @@ const { sendToHrReimbursement, sendAprrovedReimbursement } = require("../service
 const createReimbursement = async function (req, res, next) {
 	try {
 		const user = await User.findOne({ where: { user_id: req.body.id } });
-		await Overtime.create({
+		await Reimbursement.create({
 			user_email: user.user_email,
 			user_name: user.user_name,
 			isApproved: false,
@@ -15,8 +15,9 @@ const createReimbursement = async function (req, res, next) {
 
 		await sendToHrReimbursement(user);
 
-		res.json(201).json({ message: "Berhasil membuat Reimbursement" });
+		res.status(201).json({ message: "Berhasil membuat Reimbursement" });
 	} catch (error) {
+		console.log(error);
 		res.status(400).json({ message: "Tidak berhasil membuat Reimbursement" });
 	}
 };

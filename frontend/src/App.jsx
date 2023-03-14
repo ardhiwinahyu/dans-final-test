@@ -9,6 +9,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Absensi from "./pages/Absensi";
 import RequestOvertime from "./pages/RequestOvertime";
+import Reimbursement from "./pages/Reimbursement";
+import OvertimeApproval from "./pages/OvertimeApproval";
 
 function App() {
 	const { dashboard, absensi, requestOvertime, requestReimburstment, pengumuman, historyOvertime, historyReimburstment, overtimeApproval, reimbursementApproval } = useSelector(
@@ -22,7 +24,7 @@ function App() {
 				<ul>
 					{dashboard && (
 						<li>
-							<NavLink to="/">Dashboard</NavLink>
+							<NavLink to="">Dashboard</NavLink>
 						</li>
 					)}
 
@@ -38,9 +40,9 @@ function App() {
 						</li>
 					)}
 
-					{/* {requestReimburstment && (
+					{requestReimburstment && (
 						<li>
-							<NavLink to="requestovertime">Klaim Reimbursement</NavLink>
+							<NavLink to="requestreimbursement">Klaim Reimbursement</NavLink>
 						</li>
 					)}
 
@@ -72,7 +74,7 @@ function App() {
 						<li>
 							<NavLink to="reimbursementapproval">Reimbursement Approval</NavLink>
 						</li>
-					)} */}
+					)}
 				</ul>
 			</div>
 
@@ -92,6 +94,8 @@ export const router = createBrowserRouter(
 				<Route index element={<Dashboard />} />
 				<Route path="absensi" element={<Absensi />} />
 				<Route path="requestovertime" element={<RequestOvertime />} />
+				<Route path="requestreimbursement" element={<Reimbursement />} />
+				<Route path="overtimeapproval" element={<OvertimeApproval />} />
 			</Route>
 		</>
 	)

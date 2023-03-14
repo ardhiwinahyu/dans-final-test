@@ -17,8 +17,9 @@ const createOvertime = async function (req, res, next) {
 
 		await sendToHrOvertime(user);
 
-		res.json(201).json({ message: "Berhasil membuat overtime" });
+		res.status(201).json({ message: "Berhasil membuat overtime" });
 	} catch (error) {
+		console.log(error);
 		res.status(400).json({ message: "Tidak berhasil membuat overtime" });
 	}
 };

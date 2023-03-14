@@ -83,11 +83,15 @@ const sendToHr = async function () {
 		const overtime = await isHandledOvertime();
 		const reimbursement = await isHandledReimbursement();
 
+		// console.log("cek", overtime, reimbursement);
+		// console.log(hrData);
+
+		// sendEmail(hrData[0]);
 		if (overtime && reimbursement) {
 			return;
 		}
 
-		if (overtime || reimbursement) {
+		if (overtime === false || reimbursement === false) {
 			hrData.forEach((item) => {
 				sendEmail(item);
 			});
