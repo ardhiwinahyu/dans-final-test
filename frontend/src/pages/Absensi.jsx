@@ -4,6 +4,12 @@ import { useSelector } from "react-redux";
 import { Form } from "react-router-dom";
 
 function Absensi() {
+	let absenMasuk;
+	let absenPulang;
+
+	const today = new Date();
+	const h = today.getHours();
+
 	const { id } = useSelector((store) => store.user);
 
 	const [userId, setUserId] = useState("");
@@ -60,12 +66,26 @@ function Absensi() {
 		sendData();
 	};
 
+	if (h > 9 && h < 23) {
+		absenMasuk = <h2>Tidak dapat Absen masuk</h2>;
+	} else {
+		absenMasuk = <input type="button" value="Absen Hadir" onClick={handleHadir} />;
+	}
+
+	if (h > 18 && h < 19) {
+		absenPulang = <h2>Tidak dapat absen pulang</h2>;
+	} else {
+		absenPulang = <input type="button" value="Absen Pulang" onClick={handlePulang} />;
+	}
 	return (
 		<div>
 			<h2>Absensi</h2>
 			<Form method="post">
-				<input type="button" value="Absen Hadir" onClick={handleHadir} />
-				<input type="button" value="Absen Pulang" onClick={handlePulang} />
+				{/* <input type="button" value="Absen Hadir" onClick={handleHadir} />
+				<input type="button" value="Absen Pulang" onClick={handlePulang} /> */}
+
+				{absenMasuk}
+				{absenPulang}
 			</Form>
 		</div>
 	);

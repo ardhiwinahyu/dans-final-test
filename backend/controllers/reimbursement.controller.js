@@ -55,8 +55,24 @@ const handledReimbursement = async function (req, res, next) {
 	}
 };
 
+const historyReimbursement = async function (req, res, next) {
+	try {
+		console.log("email", req.body.user_email);
+		const listReimbursement = await Reimbursement.findAll({ where: { user_email: req.body.user_email }, raw: true, nest: true });
+		if (listReimbursement === null) {
+			res.status(400).json({ list: [] });
+		}
+
+		res.status(200).json({ list: listReimbursement });
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ message: "Tidak dapat mengambil data" });
+	}
+};
+
 module.exports = {
 	createReimbursement,
 	listReimbursement,
 	handledReimbursement,
+	historyReimbursement,
 };

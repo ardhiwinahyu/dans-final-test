@@ -69,8 +69,24 @@ const handleOvertime = async function (req, res, next) {
 	}
 };
 
+const historyOvertime = async function (req, res, next) {
+	try {
+		console.log("email", req.body.user_email);
+		const listOvertime = await Overtime.findAll({ where: { user_email: req.body.user_email }, raw: true, nest: true });
+		if (listOvertime === null) {
+			res.status(400).json({ list: [] });
+		}
+
+		res.status(200).json({ list: listOvertime });
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ message: "Tidak dapat mengambil data" });
+	}
+};
+
 module.exports = {
 	createOvertime,
 	listOvertime,
 	handleOvertime,
+	historyOvertime,
 };
