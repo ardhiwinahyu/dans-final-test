@@ -5,6 +5,6 @@ const { createOvertime, listOvertime, handleOvertime } = require("../controllers
 
 router.post("/createovertime", createOvertime);
 router.get("/listovertime", listOvertime);
-router.get("/getprofile", handleOvertime);
+router.put("/handleovertime", handleOvertime);
 
 module.exports = router;

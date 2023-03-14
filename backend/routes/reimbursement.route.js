@@ -4,7 +4,7 @@ const router = express.Router();
 const { createReimbursement, listReimbursement, handledReimbursement } = require("../controllers/reimbursement.controller");
 
 router.post("/createreimbursement", createReimbursement);
-router.post("/listreimbursement", listReimbursement);
-router.get("/handlereimbursement", handledReimbursement);
+router.get("/listreimbursement", listReimbursement);
+router.put("/handlereimbursement", handledReimbursement);
 
 module.exports = router;

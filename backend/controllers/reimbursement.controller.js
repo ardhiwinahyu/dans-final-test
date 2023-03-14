@@ -32,25 +32,26 @@ const listReimbursement = async function (req, res, next) {
 };
 
 const handledReimbursement = async function (req, res, next) {
-	const reimbursement = await Reimbursement.findOne({ where: { reimbursement_id: req.body.id } });
+	const reqId = Number(req.body.id);
+	const reimbursement = await Reimbursement.findOne({ where: { reimbursement_id: reqId } });
 
 	if (reimbursement === null) {
 		res.status(400).json({ message: "Id reimbursement tidak ditemukan" });
 		return;
 	}
 
-	const isApproved = req.body.isAprroved;
+	const isApproved = req.body.isApproved;
 
 	if (isApproved === true) {
-		await Reimbursement.update({ isApproved: true, isHandled: true }, { where: { overtime_id: req.body.id } });
+		await Reimbursement.update({ isApproved: true, isHandled: true }, { where: { reimbursement_id: reqId } });
 		sendAprrovedReimbursement(reimbursement, true);
-		res.json({ message: "Overtime berhasil di update ke approved" });
+		res.json({ message: "Reimbursement berhasil di update ke approved" });
 	}
 
 	if (isApproved === false) {
-		await Reimbursement.update({ isApproved: false, isHandled: true }, { where: { overtime_id: req.body.id } });
+		await Reimbursement.update({ isApproved: false, isHandled: true }, { where: { reimbursement_id: reqId } });
 		sendAprrovedReimbursement(reimbursement, false);
-		res.json({ message: "Overtime berhasil di update ke reject" });
+		res.json({ message: "Reimbursement berhasil di update ke reject" });
 	}
 };
 

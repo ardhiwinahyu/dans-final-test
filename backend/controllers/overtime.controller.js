@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const Overtime = require("../models/overtime.model");
 const { sendToHrOvertime, sendAprrovedOvertime } = require("../services/smtp");
+const { NUMBER } = require("sequelize");
 
 const createOvertime = async function (req, res, next) {
 	try {
@@ -28,6 +29,10 @@ const listOvertime = async function (req, res, next) {
 	try {
 		const overtime = await Overtime.findAll({ where: { isHandled: false }, raw: true, nest: true });
 
+		if (overtime === null) {
+			res.status(200).json({ overtimeData: [] });
+		}
+
 		res.status(200).json({ overtimeData: overtime });
 	} catch (error) {
 		res.status(400).json({ message: "Tidak dapat mendapatkan data" });
@@ -35,24 +40,32 @@ const listOvertime = async function (req, res, next) {
 };
 
 const handleOvertime = async function (req, res, next) {
-	const overtime = await Overtime.findOne({ where: { overtime_id: req.body.id } });
+	try {
+		const reqId = Number(req.body.id);
+		const overtime = await Overtime.findOne({ where: { overtime_id: reqId } });
 
-	if (overtime === null) {
-		return;
-	}
+		console.log(typeof reqId);
+		if (overtime === null) {
+			return;
+		}
 
-	const isApproved = req.body.isAprroved;
+		const isApproved = req.body.isApproved;
+		console.log(isApproved);
 
-	if (isApproved === true) {
-		await Overtime.update({ isApproved: true, isHandled: true }, { where: { overtime_id: req.body.id } });
-		sendAprrovedOvertime(overtime, true);
-		res.json({ message: "Overtime berhasil di update ke approved" });
-	}
+		if (isApproved === true) {
+			await Overtime.update({ isApproved: true, isHandled: true }, { where: { overtime_id: reqId } });
+			sendAprrovedOvertime(overtime, true);
+			res.json({ message: "Overtime berhasil di update ke approved" });
+		}
 
-	if (isApproved === false) {
-		await Overtime.update({ isApproved: false, isHandled: true }, { where: { overtime_id: req.body.id } });
-		sendAprrovedOvertime(overtime, false);
-		res.json({ message: "Overtime berhasil di update ke reject" });
+		if (isApproved === false) {
+			await Overtime.update({ isApproved: false, isHandled: true }, { where: { overtime_id: reqId } });
+			sendAprrovedOvertime(overtime, false);
+			res.json({ message: "Overtime berhasil di update ke reject" });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(400).json({ message: "Tidak berhasil mengubah data" });
 	}
 };
 

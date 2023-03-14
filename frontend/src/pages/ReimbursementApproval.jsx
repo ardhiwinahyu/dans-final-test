@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-function OvertimeApproval() {
+function ReimbursementApproval() {
 	//const { id } = useSelector((store) => store.user);
 	const [data, setData] = useState();
 	const [isData, setIsData] = useState(false);
@@ -10,11 +10,11 @@ function OvertimeApproval() {
 	useEffect(() => {
 		const getListOvertime = async () => {
 			try {
-				const list = await axios.get(`http://localhost:5000/overtime/listovertime`);
+				const list = await axios.get(`http://localhost:5000/reimbursement/listreimbursement`);
 				const res = await list.data;
-				setData(res.overtimeData);
+				setData(res.reimbursementData);
 				setIsData(true);
-				console.log(res.overtimeData);
+				console.log(res.reimbursementData);
 			} catch (error) {
 				console.log(error);
 			}
@@ -24,14 +24,14 @@ function OvertimeApproval() {
 	}, [refresh]);
 
 	const handleApprove = function (e) {
-		const overId = e.target.dataset.id;
+		const reimId = e.target.dataset.id;
 		const sendApprove = async () => {
 			try {
 				const data = await axios.put(
-					`http://localhost:5000/overtime/handleovertime`,
+					`http://localhost:5000/reimbursement/handlereimbursement`,
 					{
 						isApproved: true,
-						id: overId,
+						id: reimId,
 					},
 					{ headers: { "content-type": "application/json" } }
 				);
@@ -47,14 +47,14 @@ function OvertimeApproval() {
 	};
 
 	const handleReject = function (e) {
-		const overId = e.target.dataset.id;
+		const reimId = e.target.dataset.id;
 		const sendReject = async () => {
 			try {
 				const data = await axios.put(
-					`http://localhost:5000/overtime/handleovertime`,
+					`http://localhost:5000/reimbursement/handlereimbursement`,
 					{
 						isApproved: false,
-						id: overId,
+						id: reimId,
 					},
 					{ headers: { "content-type": "application/json" } }
 				);
@@ -71,23 +71,22 @@ function OvertimeApproval() {
 
 	return (
 		<div>
-			<h2>Overtime Approval</h2>
+			<h2>Reimbursement Approval</h2>
 
 			{isData &&
 				data.map((item) => {
 					return (
-						<div className="border-black" id={item.overtime_id}>
+						<div className="border-black" key={item.reimbursement_id}>
 							<ul>
 								<li>Nama: {item.user_name}</li>
 								<li>Email: {item.user_email}</li>
-								<li>Overtime id : {item.overtime_id}</li>
-								<li>Alasan lembur: {item.overtime_reason}</li>
-								<li>Waktu mulai : {item.startTime}</li>
-								<li>Waktu selesai: {item.endTime}</li>
-								<button onClick={handleApprove} data-id={item.overtime_id}>
+								<li>Reimbursement id : {item.reimbursement_id}</li>
+								<li>List Reimbursement: {item.reimbursement_reason}</li>
+
+								<button onClick={handleApprove} data-id={item.reimbursement_id}>
 									Terima
 								</button>
-								<button onClick={handleReject} data-id={item.overtime_id}>
+								<button onClick={handleReject} data-id={item.reimbursement_id}>
 									Tolak
 								</button>
 							</ul>
@@ -98,4 +97,4 @@ function OvertimeApproval() {
 	);
 }
 
-export default OvertimeApproval;
+export default ReimbursementApproval;

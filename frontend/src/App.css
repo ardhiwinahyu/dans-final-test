@@ -105,3 +105,7 @@ form > button {
 	color: black;
 	background-color: transparent;
 }
+
+.border-black {
+	border: 2px solid black;
+}
