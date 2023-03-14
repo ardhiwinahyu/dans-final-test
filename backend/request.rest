@@ -11,10 +11,10 @@
 
 # }
 
-POST http://localhost:5000/overtime/historyovertime
+GET http://localhost:5000/overtime/listovertime
 Content-Type: application/json
 
-{
-	"user_email": "ardhi.winahyu@gmail.com"
+# {
+# 	"user_email": "ardhi.winahyu@gmail.com"
 
-}
+# }

@@ -9,6 +9,7 @@ const Pengumuman = db.define(
 			type: dataType.INTEGER,
 			primaryKey: true,
 			allowNull: false,
+			autoIncrement: true,
 		},
 
 		isi_pengumuman: {

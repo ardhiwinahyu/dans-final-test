@@ -14,6 +14,7 @@ import OvertimeApproval from "./pages/OvertimeApproval";
 import ReimbursementApproval from "./pages/ReimbursementApproval";
 import HistoryReimbursement from "./pages/HistoryReimbursement";
 import HistoryLembur from "./pages/HistoryLembur";
+import Pengumuman from "./pages/Pengumuman";
 
 function App() {
 	const { dashboard, absensi, requestOvertime, requestReimburstment, pengumuman, historyOvertime, historyReimburstment, overtimeApproval, reimbursementApproval } = useSelector(
@@ -57,13 +58,13 @@ function App() {
 
 					{historyOvertime && (
 						<li>
-							<NavLink to="historyovertime">List Lembur</NavLink>
+							<NavLink to="historyovertime">History Lembur</NavLink>
 						</li>
 					)}
 
 					{historyReimburstment && (
 						<li>
-							<NavLink to="historyreimburstment">List Reimbursement</NavLink>
+							<NavLink to="historyreimburstment">History Reimbursement</NavLink>
 						</li>
 					)}
 
@@ -102,6 +103,7 @@ export const router = createBrowserRouter(
 				<Route path="reimbursementapproval" element={<ReimbursementApproval />} />
 				<Route path="historyreimburstment" element={<HistoryReimbursement />} />
 				<Route path="historyovertime" element={<HistoryLembur />} />
+				<Route path="pengumuman" element={<Pengumuman />} />
 			</Route>
 		</>
 	)

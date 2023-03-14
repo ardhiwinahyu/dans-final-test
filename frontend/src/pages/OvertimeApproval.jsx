@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import dateFormat from "dateformat";
 
 function OvertimeApproval() {
 	//const { id } = useSelector((store) => store.user);
@@ -76,14 +77,14 @@ function OvertimeApproval() {
 			{isData &&
 				data.map((item) => {
 					return (
-						<div className="border-black" id={item.overtime_id}>
+						<div className="border-black" key={item.overtime_id}>
 							<ul>
 								<li>Nama: {item.user_name}</li>
 								<li>Email: {item.user_email}</li>
 								<li>Overtime id : {item.overtime_id}</li>
 								<li>Alasan lembur: {item.overtime_reason}</li>
-								<li>Waktu mulai : {item.startTime}</li>
-								<li>Waktu selesai: {item.endTime}</li>
+								<li>Waktu mulai : {dateFormat(new Date(item.startTime), "yyyy-mm-dd HH:MM:ss")}</li>
+								<li>Waktu selesai: {dateFormat(new Date(item.endTime), "yyyy-mm-dd HH:MM:ss")}</li>
 								<button onClick={handleApprove} data-id={item.overtime_id}>
 									Terima
 								</button>

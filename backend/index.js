@@ -11,15 +11,18 @@ const Reimbursement = require("./models/reimbursement.model");
 const Roles_to_menus = require("./models/roles_to_menus.model");
 const schedule = require("node-schedule");
 const { sendToHr } = require("./cron");
+const bodyParser = require("body-parser");
 
 const userRoute = require("./routes/user.route");
 const presenceRoute = require("./routes/presence.route");
 const overtimeRoute = require("./routes/overtime.route");
 const reimbursementRoute = require("./routes/reimbursement.route");
+const pengumumanRoute = require("./routes/pengumuman.route");
 
 const cors = require("cors");
 const db = require("./configs/database");
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
@@ -33,7 +36,7 @@ app.use(cors());
 		// await Absensi.sync();
 		// await Menu.sync();
 		// await Overtime.sync();
-		//await Pengumuman.sync();
+		await Pengumuman.sync();
 		// await Reimbursement.sync();
 		//await Roles_to_menus.sync();
 
@@ -50,6 +53,7 @@ app.use("/user", userRoute);
 app.use("/presence", presenceRoute);
 app.use("/overtime", overtimeRoute);
 app.use("/reimbursement", reimbursementRoute);
+app.use("/pengumuman", pengumumanRoute);
 
 schedule.scheduleJob("0 0 * * *", async function () {
 	try {

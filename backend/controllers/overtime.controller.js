@@ -1,7 +1,6 @@
 const User = require("../models/user.model");
 const Overtime = require("../models/overtime.model");
 const { sendToHrOvertime, sendAprrovedOvertime } = require("../services/smtp");
-const { NUMBER } = require("sequelize");
 
 const createOvertime = async function (req, res, next) {
 	try {
